@@ -68,6 +68,7 @@ class Solution {
 };
 
 // 二叉搜索树的一个特性就是中序遍历是递增序列
+// 以下使用递归实现中序遍历
 class Solution {
  public:
   long left = LONG_MIN;
@@ -78,5 +79,29 @@ class Solution {
     if (root->val <= left) return false;
     left = root->val;
     return isValidBST(root->right);
+  }
+};
+// 以下使用迭代实现中序遍历
+class Solution {
+ public:
+  bool isValidBST(TreeNode* root) {
+    stack<TreeNode*> stc;
+    long minline = LONG_MIN;
+
+    while (!stc.empty() || root) {
+      while (root) {
+        stc.push(root);
+        root = root->left;
+      }
+      root = stc.top();
+      stc.pop();
+
+      //处理本节点
+      if (root->val <= minline) return false;
+      minline = root->val;
+      //继续后续
+      root = root->right;
+    }
+    return true;
   }
 };
