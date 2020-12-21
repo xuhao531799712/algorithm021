@@ -4,6 +4,8 @@ struct ListNode {
   ListNode* next;
   ListNode(int x) : val(x), next(NULL) {}
 };
+
+// 迭代做法
 class Solution {
  public:
   ListNode* reverseList(ListNode* head) {
@@ -15,5 +17,19 @@ class Solution {
       pt = tmp;
     }
     return pre;
+  }
+};
+
+// 递归解法
+class Solution {
+ public:
+  ListNode* reverseList(ListNode* head) {
+    if (!head || !head->next) return head;
+    ListNode* root = reverseList(head->next);
+
+    head->next->next = head;
+    head->next = nullptr;
+
+    return root;
   }
 };
