@@ -2,23 +2,15 @@
 class Solution {
  public:
   vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-    //使用双端队列，队列总是单调递减的，也就是当前窗口的最大值在队列最左边，队列中存数组的下标
     deque<int> deq;
-    vector<int> res(nums.size() - k + 1);
-    for (int i = 0; i < k; i++) {
-      while (!deq.empty() && nums[i] > nums[deq.back()]) {
-        deq.pop_back();
-      }
+    int count = nums.size() - k + 1;
+    vector<int> res(count);
+    // 双端队列保持一个递减的姿势,并且存的是index
+    for (int i = 0; i < nums.size(); ++i) {
+      while (!deq.empty() && deq.front() + k <= i) deq.pop_front();
+      while (!deq.empty() && nums[i] > nums[deq.back()]) deq.pop_back();
       deq.push_back(i);
-      res[0] = nums[deq.front()];
-    }
-    for (int i = k; i < nums.size(); i++) {
-      if (i - deq.front() == k) deq.pop_front();
-      while (!deq.empty() && nums[i] > nums[deq.back()]) {
-        deq.pop_back();
-      }
-      deq.push_back(i);
-      res[i - k + 1] = nums[deq.front()];
+      if (i >= k - 1) res[i - k + 1] = nums[deq.front()];
     }
     return res;
   }
