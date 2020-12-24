@@ -30,7 +30,7 @@
 
 此处要注意二分查找的搜索范围更新的原则：1.确保每次迭代，搜索范围都会变小；2.确保每次迭代，target 始终在搜索范围内。只要满足这两点进行迭代，最后循环一定会退出，且可以得到结果。
 
-那么为了满足这两点，就可以得到 ``` mid = left + (right - left) / 2 ``` 就应该与 ```left = mid - 1; right = mid;``` 搭配；而 ``` mid = left + (right - left + 1) / 2 ``` 就应该与 ```left = mid + 1; right = mid;``` 搭配。而 ```left = mid + 1; right = mid - 1;``` 容易使得 right < left ，所以不便与 ```while (left < right)``` 搭配。
+那么为了满足这两点，就可以得到 ``` mid = left + (right - left) / 2 ``` 就应该与 ```left = mid + 1; right = mid;``` 搭配；而 ``` mid = left + (right - left + 1) / 2 ``` 就应该与 ```left = mid; right = mid - 1;``` 搭配。而 ```left = mid + 1; right = mid - 1;``` 容易使得 right < left ，所以不便与 ```while (left < right)``` 搭配。
 
 那么得到的我需要牢记的模板为：
 
