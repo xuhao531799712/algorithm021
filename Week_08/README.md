@@ -147,7 +147,7 @@ private:
 
 #### 什么是缓存击穿
 
-![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png)
+![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\缓存处理流程.png)
 
 在高并发场景下，如果某一个key被高并发访问，没有被命中，出于对容错性考虑，会尝试去从后端数据库中获取，从而导致了大量请求达到数据库，而当该key对应的数据本身就是空的情况下，这就导致数据库中并发的去执行了很多不必要的查询操作，从而导致巨大冲击和压力。
 
@@ -252,9 +252,9 @@ private:
 
 ### 排序分类
 
-![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB.png)
+![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\排序算法分类.png)
 
-![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6.png)
+![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\排序算法复杂度.png)
 
 _建议阅读：https://www.cnblogs.com/onepixel/p/7674659.html_
 
@@ -326,7 +326,7 @@ void merge(vector<int>& nums, int left, int mid, int right) {
 #### 快速排序
 
 ```cpp
-void quicksort(vector<int>& nums, int left = 0, int right = nums.size() - 1) {
+void quicksort(vector<int>& nums, int left, int right) {
     if (right <= left) return;
     int pivot = nums[left], index = left + 1;
     // index 指向前面出现的最早的一个大于 pivot 的位置，用于交换
@@ -347,6 +347,35 @@ void quicksort(vector<int>& nums, int left = 0, int right = nums.size() - 1) {
 快速排序的空间复杂度来源于递归栈，由于递归深度是 logn，所以空间复杂度为 O(logn).
 
 中间的 for 循环部分也常作为一个单独的 partion() 函数单独写出来。
+
+这种常规的快速排序的实现，会在输入序列是正序或者是反序的时候（与要达到的顺序相反），效率会达到最坏，这时时间效率是O(n^2)。
+为了解决这种情况，引入了随机化塑像，来使算法运行不依赖于输入序列的顺序。
+
+```cpp
+// 随机化快速排序
+void randomQuicksort(vector<int>& nums, int left, int right) {
+    if (right <= left) return;
+    
+    // 此处随机选择范围内的一个下标换到最左端位置作为 pivot 元素
+    int i = rand() % (right - left + 1) + left;
+    swap(nums[left], nums[i]);
+    
+    // 剩下与常规快速排序相同
+    int pivot = nums[left], index = left + 1;
+    // index 指向前面出现的最早的一个大于 pivot 的位置，用于交换
+    for (int i = left + 1; i <= right; ++i) {
+        if (nums[i] < pivot) {
+            swap(nums[i], nums[index]);
+            ++index;
+        }
+    }
+    swap(nums[left], nums[index - 1]);
+    // index - 1 为当前 pivot 在的位置，也就是 partion_position
+
+    randomQuicksort(nums, left, index - 2);
+    randomQuicksort(nums, index, right);
+}
+```
 
 #### 堆排序
 
