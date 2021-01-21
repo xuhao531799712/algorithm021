@@ -147,7 +147,7 @@ private:
 
 #### 什么是缓存击穿
 
-![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\缓存处理流程.png)
+![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E7%BC%93%E5%AD%98%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B.png)
 
 在高并发场景下，如果某一个key被高并发访问，没有被命中，出于对容错性考虑，会尝试去从后端数据库中获取，从而导致了大量请求达到数据库，而当该key对应的数据本身就是空的情况下，这就导致数据库中并发的去执行了很多不必要的查询操作，从而导致巨大冲击和压力。
 
@@ -252,9 +252,9 @@ private:
 
 ### 排序分类
 
-![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\排序算法分类.png)
+![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB.png)
 
-![avatar](E:\传送\算法训练营笔记\算法训练营作业\第八周\排序算法复杂度.png)
+![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_08/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6.png)
 
 _建议阅读：https://www.cnblogs.com/onepixel/p/7674659.html_
 
