@@ -6,8 +6,8 @@
 ？跳表的增加和删除操作为什么是O(logn)复杂度呢
 
 #跳表
-![avatar](E:/传送/算法训练营笔记/图片/skip-list.png)
-![avatar](E:/传送/算法训练营笔记/图片/skip-list2.png)
+![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_01/skip-list.png)
+![avatar](https://github.com/xuhao531799712/algorithm021/blob/main/Week_01/skip-list2.png)
 跳表只能用于元素有序的情况（链表中），对标的是平衡树和二分查找。
 
 插入、删除、搜索都为O(logn)复杂度的操作。
